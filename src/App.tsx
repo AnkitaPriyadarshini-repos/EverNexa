@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppShell } from './components/AppShell';
 import { TodayPage } from './pages/TodayPage';
 import { CategoryPage } from './pages/CategoryPage';
+import { IndieGroupingPage } from './pages/IndieGroupingPage';
 import { AppDetailPage } from './pages/AppDetailPage';
 import { SearchResultsPage } from './pages/SearchResultsPage';
 import { TwentyFourSevenPage } from './pages/TwentyFourSevenPage';
@@ -23,6 +24,9 @@ export const App: React.FC = () => {
           <Route path="/games" element={<CategoryPage />} />
           <Route path="/apps" element={<CategoryPage />} />
           <Route path="/arcade" element={<CategoryPage />} />
+          <Route path="/indie" element={<IndieGroupingPage />} />
+          <Route path="/grouping/174175" element={<IndieGroupingPage />} />
+          <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route path="/iphone" element={<CategoryPage />} />
           <Route path="/ipad" element={<CategoryPage />} />
           <Route path="/mac" element={<CategoryPage />} />

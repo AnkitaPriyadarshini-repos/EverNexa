@@ -1,256 +1,160 @@
-import React, { useState } from "react";
-import { TWENTY_FOUR_SEVEN_APP, OTHER_APPS } from "../data/appStoreData";
-import { AppSimulatorModal } from "../components/AppSimulatorModal";
-import { Star, Share2, Play, Download, ShieldCheck, ChevronRight } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ProductItem } from '../types/appStore';
+import { getStoreProducts } from '../services/storeService';
+import { addToCart } from '../services/cartService';
+import { Clock, ShoppingCart, Zap, Flame, CheckCircle, ArrowRight } from 'lucide-react';
 
 export const TwentyFourSevenPage: React.FC = () => {
-  const [downloaded, setDownloaded] = useState(false);
-  const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
-  const app = TWENTY_FOUR_SEVEN_APP;
+  const navigate = useNavigate();
+  const [products, setProducts] = useState<ProductItem[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [loading, setLoading] = useState(true);
+  const [addedItem, setAddedItem] = useState<string | null>(null);
 
-  const handleGetClick = () => {
-    setDownloaded(true);
-    setIsSimulatorOpen(true);
+  const categories = ['All', 'Hot Food', 'Beverages', 'Snacks', 'Ice Cream', 'Groceries'];
+
+  useEffect(() => {
+    const load = async () => {
+      setLoading(true);
+      const items = await getStoreProducts(activeCategory);
+      setProducts(items);
+      setLoading(false);
+    };
+    load();
+  }, [activeCategory]);
+
+  const handleAddToCart = (product: ProductItem, e: React.MouseEvent) => {
+    e.stopPropagation();
+    addToCart(product, 1);
+    setAddedItem(product.name);
+    setTimeout(() => setAddedItem(null), 2500);
   };
 
   return (
-    <div className="p-6 lg:p-12 max-w-5xl mx-auto space-y-10 animate-fade-in text-slate-100 font-sans">
-      
-      {/* Top Breadcrumb & URL indicator */}
-      <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
-        <span>https://apps.apple.com/in/app/twenty-four-seven/id1049305223</span>
-      </div>
-
-      {/* Header Info Section */}
-      <div className="flex flex-col sm:flex-row items-start gap-6 border-b border-[#26262A] pb-8">
-        
-        {/* App Icon */}
-        <div className="relative group">
-          <img
-            src={app.icon}
-            alt={app.name}
-            className="w-32 h-32 md:w-36 md:h-36 rounded-[28px] object-cover shadow-2xl border border-slate-700/80 group-hover:scale-105 transition-transform"
-          />
+    <div className="space-y-8 pb-20">
+      {/* Toast Notification */}
+      {addedItem && (
+        <div className="fixed bottom-20 right-6 z-50 bg-gray-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-amber-500 animate-in fade-in slide-in-from-bottom-5">
+          <CheckCircle className="w-5 h-5 text-emerald-400" />
+          <span className="text-sm font-semibold">{addedItem} added to Cart!</span>
         </div>
+      )}
 
-        {/* Title, Subtitle, Developer, GET Button */}
-        <div className="flex-1 space-y-2">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h1 className="font-heading font-extrabold text-3xl md:text-4xl text-white">
-                {app.name}
-              </h1>
-              <p className="text-slate-400 text-sm md:text-base font-medium mt-1">
-                {app.subtitle}
-              </p>
-              <p className="text-sky-400 text-xs font-semibold mt-0.5 hover:underline cursor-pointer">
-                {app.developer}
-              </p>
-            </div>
-
-            <button
-              onClick={() => {
-                navigator.clipboard?.writeText(window.location.href);
-                alert("App Store link copied!");
-              }}
-              className="p-2.5 bg-[#252528] hover:bg-[#323236] rounded-full text-slate-300 transition-colors"
-              title="Share App"
-            >
-              <Share2 className="w-4 h-4" />
-            </button>
+      {/* Hero Banner */}
+      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 text-white p-8 sm:p-12 shadow-xl">
+        <div className="relative z-10 max-w-xl space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider">
+            <Clock className="w-3.5 h-3.5 text-amber-300" />
+            <span>24S Express Delivery</span>
           </div>
 
-          {/* GET / OPEN Button & Action Row */}
-          <div className="pt-4 flex flex-wrap items-center gap-4">
-            <button
-              onClick={handleGetClick}
-              className={`px-7 py-2.5 rounded-full font-extrabold text-xs uppercase tracking-wider shadow-lg transition-all transform hover:scale-105 active:scale-95 ${
-                downloaded
-                  ? "bg-emerald-500 text-black shadow-emerald-500/30"
-                  : "bg-sky-500 hover:bg-sky-400 text-white shadow-sky-500/30"
-              }`}
-            >
-              {downloaded ? "OPEN APP SIMULATOR" : "GET"}
-            </button>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+            Twenty Four Seven Store
+          </h1>
 
-            {app.inAppPurchases && (
-              <span className="text-[10px] text-slate-500 font-medium uppercase tracking-wider">
-                In-App Purchases
-              </span>
-            )}
+          <p className="text-amber-100 text-sm sm:text-base font-medium">
+            24/7 Convenience Store & 15-Minute Express Delivery. Hot dogs, iced coffee, snacks, groceries and late-night essentials delivered instantly to your door.
+          </p>
 
-            <button
-              onClick={() => setIsSimulatorOpen(true)}
-              className="flex items-center gap-1.5 bg-yellow-400/20 border border-yellow-400/40 text-yellow-400 hover:bg-yellow-400/30 px-4 py-2 rounded-full text-xs font-extrabold transition-all ml-auto"
-            >
-              <Play className="w-3.5 h-3.5 fill-yellow-400" />
-              <span>TEST LIVE 24SEVEN APP</span>
-            </button>
+          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-bold">
+            <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-md">
+              <Zap className="w-4 h-4 text-amber-300" /> 15-Min Delivery
+            </span>
+            <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-md">
+              <Flame className="w-4 h-4 text-amber-300" /> Fresh Hot Food
+            </span>
           </div>
-
         </div>
 
+        <div className="absolute right-0 bottom-0 opacity-20 pointer-events-none text-[160px] font-black leading-none select-none">
+          24S
+        </div>
       </div>
 
-      {/* Metrics Ribbon */}
-      <div className="grid grid-cols-3 md:grid-cols-5 gap-4 py-4 border-b border-[#26262A] text-center text-xs">
-        
-        <div className="space-y-1">
-          <span className="text-slate-500 font-bold uppercase text-[10px]">RATINGS</span>
-          <div className="font-heading font-extrabold text-lg text-white flex items-center justify-center gap-1">
-            <span>{app.rating}</span>
-            <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-          </div>
-          <p className="text-[10px] text-slate-500">{app.ratingCount}</p>
-        </div>
-
-        <div className="space-y-1 border-l border-[#26262A]">
-          <span className="text-slate-500 font-bold uppercase text-[10px]">AGE</span>
-          <div className="font-heading font-extrabold text-lg text-white">{app.ageRating}</div>
-          <p className="text-[10px] text-slate-500">Years Old</p>
-        </div>
-
-        <div className="space-y-1 border-l border-[#26262A]">
-          <span className="text-slate-500 font-bold uppercase text-[10px]">CHART</span>
-          <div className="font-heading font-extrabold text-lg text-white">#1</div>
-          <p className="text-[10px] text-slate-500">{app.category}</p>
-        </div>
-
-        <div className="hidden md:block space-y-1 border-l border-[#26262A]">
-          <span className="text-slate-500 font-bold uppercase text-[10px]">DEVELOPER</span>
-          <div className="font-heading font-bold text-sm text-white truncate px-2">{app.seller}</div>
-          <p className="text-[10px] text-slate-500">Official Retail</p>
-        </div>
-
-        <div className="hidden md:block space-y-1 border-l border-[#26262A]">
-          <span className="text-slate-500 font-bold uppercase text-[10px]">SIZE</span>
-          <div className="font-heading font-extrabold text-lg text-white">{app.size}</div>
-          <p className="text-[10px] text-slate-500">Universal App</p>
-        </div>
-
+      {/* Category Pills */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActiveCategory(cat)}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 ${
+              activeCategory === cat
+                ? 'bg-amber-500 text-white shadow-md'
+                : 'bg-gray-100 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-800'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
-      {/* iPhone Screenshots Gallery */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="font-heading font-bold text-lg text-white">Preview</h3>
-          <span className="text-xs text-slate-500 font-medium">iPhone</span>
-        </div>
-
-        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-none">
-          {app.screenshots?.map((sc, idx) => (
+      {/* Products Grid */}
+      {loading ? (
+        <div className="py-20 text-center text-gray-400">Loading products...</div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
             <div
-              key={idx}
-              onClick={() => setIsSimulatorOpen(true)}
-              className="relative w-60 md:w-64 aspect-[9/19] rounded-[36px] overflow-hidden border-4 border-[#2D2D32] bg-slate-950 shrink-0 shadow-2xl cursor-pointer group hover:scale-[1.02] transition-all"
+              key={product.id}
+              onClick={() => navigate(`/twenty-four-seven/product/${product.id}`)}
+              className="group bg-white dark:bg-zinc-900 rounded-3xl p-4 border border-gray-200/80 dark:border-zinc-800 shadow-md hover:shadow-xl transition-all flex flex-col justify-between cursor-pointer"
             >
-              <img
-                src={sc.url}
-                alt={sc.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-              
-              <div className="absolute bottom-4 left-4 right-4 text-center">
-                <span className="text-xs font-extrabold text-white bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-yellow-400/40 inline-block shadow-lg">
-                  {sc.title}
-                </span>
+              <div>
+                {/* Product Image */}
+                <div className="relative aspect-square rounded-2xl overflow-hidden mb-3 bg-gray-100 dark:bg-zinc-800">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[10px] font-bold flex items-center gap-1">
+                    <Clock className="w-3 h-3 text-amber-400" />
+                    <span>{product.deliveryTime}</span>
+                  </div>
+                  {product.discountPrice && (
+                    <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[10px] font-extrabold">
+                      SAVE ₹{product.price - product.discountPrice}
+                    </div>
+                  )}
+                </div>
+
+                <div className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 mb-1">
+                  {product.category}
+                </div>
+                <h3 className="text-base font-bold text-gray-900 dark:text-white line-clamp-1 group-hover:text-amber-500 transition-colors">
+                  {product.name}
+                </h3>
+                <p className="text-xs text-gray-500 dark:text-zinc-400 line-clamp-2 mt-1 font-normal">
+                  {product.description}
+                </p>
+              </div>
+
+              {/* Price & Add to Cart Footer */}
+              <div className="mt-4 pt-3 border-t border-gray-100 dark:border-zinc-800/80 flex items-center justify-between">
+                <div>
+                  <div className="text-base font-extrabold text-gray-900 dark:text-white">
+                    ₹{product.discountPrice || product.price}
+                  </div>
+                  {product.discountPrice && (
+                    <div className="text-[11px] text-gray-400 line-through font-medium">
+                      ₹{product.price}
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  onClick={(e) => handleAddToCart(product, e)}
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white text-xs font-bold transition-all shadow-sm"
+                >
+                  <ShoppingCart className="w-3.5 h-3.5" />
+                  <span>ADD</span>
+                </button>
               </div>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* What's New Section */}
-      <div className="border-t border-[#26262A] pt-8 space-y-3">
-        <div className="flex items-center justify-between">
-          <h3 className="font-heading font-bold text-lg text-white">What's New</h3>
-          <span className="text-xs text-slate-500 font-medium">Version {app.version}</span>
-        </div>
-        <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line font-mono bg-[#18181B] p-4 rounded-2xl border border-slate-800">
-          {app.versionNotes}
-        </p>
-      </div>
-
-      {/* Description Section */}
-      <div className="border-t border-[#26262A] pt-8 space-y-3">
-        <h3 className="font-heading font-bold text-lg text-white">Description</h3>
-        <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line">
-          {app.description}
-        </p>
-      </div>
-
-      {/* Ratings & Reviews */}
-      <div className="border-t border-[#26262A] pt-8 space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="font-heading font-bold text-lg text-white">Ratings & Reviews</h3>
-          <span className="text-xs text-sky-400 font-bold hover:underline cursor-pointer">
-            See All Reviews
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {app.reviews?.map((rev) => (
-            <div key={rev.id} className="bg-[#18181B] border border-slate-800 rounded-2xl p-4 space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-white">{rev.author}</span>
-                <span className="text-slate-500 text-[10px]">{rev.date}</span>
-              </div>
-              <div className="flex text-amber-400">
-                {Array.from({ length: rev.rating }).map((_, i) => (
-                  <Star key={i} className="w-3 h-3 fill-amber-400" />
-                ))}
-              </div>
-              <h5 className="font-bold text-xs text-white">{rev.title}</h5>
-              <p className="text-xs text-slate-400 leading-normal">{rev.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Information Table */}
-      <div className="border-t border-[#26262A] pt-8 space-y-4">
-        <h3 className="font-heading font-bold text-lg text-white">Information</h3>
-
-        <div className="divide-y divide-[#26262A] text-xs">
-          <div className="py-3 flex justify-between">
-            <span className="text-slate-500">Provider</span>
-            <span className="text-white font-medium">{app.seller}</span>
-          </div>
-          <div className="py-3 flex justify-between">
-            <span className="text-slate-500">Size</span>
-            <span className="text-white font-medium">{app.size}</span>
-          </div>
-          <div className="py-3 flex justify-between">
-            <span className="text-slate-500">Category</span>
-            <span className="text-sky-400 font-medium">{app.category}</span>
-          </div>
-          <div className="py-3 flex justify-between">
-            <span className="text-slate-500">Compatibility</span>
-            <span className="text-white font-medium max-w-xs text-right">{app.compatibility}</span>
-          </div>
-          <div className="py-3 flex justify-between">
-            <span className="text-slate-500">Languages</span>
-            <span className="text-white font-medium">{app.languages}</span>
-          </div>
-          <div className="py-3 flex justify-between">
-            <span className="text-slate-500">Age Rating</span>
-            <span className="text-white font-medium">{app.ageRating}</span>
-          </div>
-          <div className="py-3 flex justify-between">
-            <span className="text-slate-500">Copyright</span>
-            <span className="text-white font-medium">{app.copyright}</span>
-          </div>
-          <div className="py-3 flex justify-between">
-            <span className="text-slate-500">Price</span>
-            <span className="text-white font-medium">{app.price}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Interactive Live App Simulator Modal */}
-      <AppSimulatorModal isOpen={isSimulatorOpen} onClose={() => setIsSimulatorOpen(false)} />
-
+      )}
     </div>
   );
 };

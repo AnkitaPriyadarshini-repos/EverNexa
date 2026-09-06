@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppItem } from '../types/appStore';
 
 interface AppCardProps {
@@ -14,6 +15,12 @@ export const AppCard: React.FC<AppCardProps> = ({
   showCategory = true,
   onGetClick 
 }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/app/${app.id}`);
+  };
+
   const handleGet = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (onGetClick) onGetClick(app);
@@ -22,7 +29,10 @@ export const AppCard: React.FC<AppCardProps> = ({
 
   if (layout === 'overlay') {
     return (
-      <div className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white/75 dark:bg-zinc-900/80 backdrop-blur-md border border-white/20 dark:border-zinc-800/50 shadow-lg">
+      <div 
+        onClick={handleCardClick}
+        className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white/75 dark:bg-zinc-900/80 backdrop-blur-md border border-white/20 dark:border-zinc-800/50 shadow-lg cursor-pointer hover:bg-white/90 transition-colors"
+      >
         <div className="flex items-center gap-3 min-w-0">
           <img
             src={app.icon}
@@ -53,7 +63,10 @@ export const AppCard: React.FC<AppCardProps> = ({
   }
 
   return (
-    <div className="flex items-center justify-between gap-3 p-2 rounded-xl hover:bg-gray-100/70 dark:hover:bg-zinc-900/50 transition-colors group cursor-pointer">
+    <div 
+      onClick={handleCardClick}
+      className="flex items-center justify-between gap-3 p-2 rounded-xl hover:bg-gray-100/70 dark:hover:bg-zinc-900/50 transition-colors group cursor-pointer"
+    >
       <div className="flex items-center gap-3 min-w-0">
         <img
           src={app.icon}

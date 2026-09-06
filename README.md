@@ -1,6 +1,20 @@
 # EverNexa — Production-Grade Full-Stack App Discovery & 24/7 Commerce Platform
 
+<div align="center">
+
+[![App Store Today](https://img.shields.io/badge/App_Store-India_Today_Recreation-0D96F6?style=for-the-badge&logo=apple&logoColor=white)](https://apps.apple.com/in/iphone/today)
+[![React 19](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+</div>
+
 EverNexa is a production-grade full-stack web platform inspired by the public Apple App Store India "Today" and "Indie" experiences, integrated with a 24/7 convenience store, real-time order tracking, live app metadata lookup, debounced search, authentication, database persistence, and system telemetry monitoring.
+
+---
 
 ## 🚀 Repository & Deployment Links
 

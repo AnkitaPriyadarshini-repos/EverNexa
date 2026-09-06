@@ -2,11 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppCard } from '../components/AppCard';
 import { RankedCard } from '../components/RankedCard';
+import { EditorialCard } from '../components/EditorialCard';
 import { 
+  HERO_INDIE_SPOTLIGHT,
   ESSENTIAL_INDIE_GAMES, 
+  STORY_RICH_INDIES,
   LETS_PLAY_GAMES, 
   TOP_PAID_INDIE, 
   TOP_FREE_INDIE, 
+  COZY_INDIES,
   ALL_TIME_GREATS, 
   QUICK_LINKS 
 } from '../data/indieData';
@@ -25,7 +29,9 @@ export const IndieGroupingPage: React.FC = () => {
   };
 
   const essentialCols = chunkColumns(ESSENTIAL_INDIE_GAMES);
+  const storyCols = chunkColumns(STORY_RICH_INDIES);
   const letsPlayCols = chunkColumns(LETS_PLAY_GAMES);
+  const cozyCols = chunkColumns(COZY_INDIES);
   const allTimeCols = chunkColumns(ALL_TIME_GREATS);
 
   return (
@@ -36,6 +42,11 @@ export const IndieGroupingPage: React.FC = () => {
           Indie
         </h1>
       </div>
+
+      {/* FEATURED INDIE HERO SPOTLIGHT CARD */}
+      <section>
+        <EditorialCard item={HERO_INDIE_SPOTLIGHT} size="hero" />
+      </section>
 
       {/* SECTION 1: Essential Indie Games */}
       <section className="space-y-4">
@@ -49,7 +60,6 @@ export const IndieGroupingPage: React.FC = () => {
           Small developers, big fun
         </p>
 
-        {/* 3-Column Stacked Grid */}
         <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
           {essentialCols.map((col, cIdx) => (
             <div key={cIdx} className="w-[300px] sm:w-[340px] shrink-0 space-y-2">
@@ -61,7 +71,30 @@ export const IndieGroupingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 2: Let's Play */}
+      {/* SECTION 2: Story-Rich Indie Adventures (NEW) */}
+      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
+        <div className="flex items-center gap-1 cursor-pointer group">
+          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+            Story-Rich Indie Adventures
+          </h2>
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+        </div>
+        <p className="text-xs sm:text-sm text-gray-400 font-medium -mt-2">
+          Unforgettable narratives and emotional journeys
+        </p>
+
+        <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
+          {storyCols.map((col, cIdx) => (
+            <div key={cIdx} className="w-[300px] sm:w-[340px] shrink-0 space-y-2">
+              {col.map((app: any) => (
+                <AppCard key={app.id} app={app} layout="compact" showCategory={false} />
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 3: Let's Play */}
       <section className="space-y-4 border-t border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
           <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
@@ -81,7 +114,7 @@ export const IndieGroupingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 3: Top Paid */}
+      {/* SECTION 4: Top Paid */}
       <section className="space-y-4 border-t border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
           <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
@@ -105,7 +138,7 @@ export const IndieGroupingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 4: Top Free */}
+      {/* SECTION 5: Top Free */}
       <section className="space-y-4 border-t border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
           <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
@@ -129,7 +162,30 @@ export const IndieGroupingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 5: All-Time Greats */}
+      {/* SECTION 6: Cozy & Relaxation Indies (NEW) */}
+      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
+        <div className="flex items-center gap-1 cursor-pointer group">
+          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+            Cozy & Relaxation Indies
+          </h2>
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+        </div>
+        <p className="text-xs sm:text-sm text-gray-400 font-medium -mt-2">
+          Unwind with peaceful puzzles, soothing music and warm simulations
+        </p>
+
+        <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
+          {cozyCols.map((col, cIdx) => (
+            <div key={cIdx} className="w-[300px] sm:w-[340px] shrink-0 space-y-2">
+              {col.map((app: any) => (
+                <AppCard key={app.id} app={app} layout="compact" showCategory={false} />
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 7: All-Time Greats */}
       <section className="space-y-4 border-t border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
           <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
@@ -149,7 +205,7 @@ export const IndieGroupingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 6: Quick Links */}
+      {/* SECTION 8: Quick Links */}
       <section className="space-y-4 border-t border-zinc-800/80 pt-8">
         <h2 className="text-xl sm:text-2xl font-bold text-white">
           Quick Links

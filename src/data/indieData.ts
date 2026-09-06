@@ -1,3 +1,121 @@
+export const HERO_INDIE_SPOTLIGHT = {
+  "id": "indie-hero-spotlight",
+  "eyebrow": "INDIE SPOTLIGHT",
+  "title": "Celestial Indie Masterpieces",
+  "description": "Explore mesmerizing hand-crafted worlds created by passionate independent game studios across the globe.",
+  "heroImage": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1400&q=80",
+  "backgroundColor": "#121824",
+  "textColor": "#FFFFFF",
+  "app": {
+    "id": "celeste",
+    "name": "Celeste",
+    "subtitle": "Help Madeline survive her inner demons",
+    "category": "Platformer",
+    "icon": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=180&q=80",
+    "price": "\u20b9499"
+  }
+};
+export const STORY_RICH_INDIES = [
+  {
+    "id": "edithfinch",
+    "name": "What Remains of Edith Finch",
+    "subtitle": "A collection of strange tales",
+    "category": "Story",
+    "icon": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "gris",
+    "name": "GRIS",
+    "subtitle": "A serene and evocative experience",
+    "category": "Artistic",
+    "icon": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "outerwilds",
+    "name": "Outer Wilds",
+    "subtitle": "An open world mystery loop",
+    "category": "Sci-Fi",
+    "icon": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "discoelysium",
+    "name": "Disco Elysium",
+    "subtitle": "A groundbreaking roleplaying game",
+    "category": "RPG",
+    "icon": "https://images.unsplash.com/photo-1566438480900-0609be27a4be?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "seaofstars",
+    "name": "Sea of Stars",
+    "subtitle": "Turn-based RPG inspired by classics",
+    "category": "RPG",
+    "icon": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "davethediver",
+    "name": "Dave the Diver",
+    "subtitle": "Casual, singleplayer adventure RPG",
+    "category": "Casual",
+    "icon": "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  }
+];
+export const COZY_INDIES = [
+  {
+    "id": "stardew",
+    "name": "Stardew Valley",
+    "subtitle": "Build the farm of your dreams",
+    "category": "Simulation",
+    "icon": "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=180&q=80",
+    "price": "\u20b9399"
+  },
+  {
+    "id": "unpacking",
+    "name": "Unpacking",
+    "subtitle": "A zen puzzle game about moving",
+    "category": "Zen",
+    "icon": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "ashorthike",
+    "name": "A Short Hike",
+    "subtitle": "Hike, climb, and soar",
+    "category": "Adventure",
+    "icon": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "spiritfarer",
+    "name": "Spiritfarer",
+    "subtitle": "A cozy management game about dying",
+    "category": "Simulation",
+    "icon": "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "coffeetalk",
+    "name": "Coffee Talk",
+    "subtitle": "Brew drinks and listen to stories",
+    "category": "Visual Novel",
+    "icon": "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  },
+  {
+    "id": "dorfromantik",
+    "name": "Dorfromantik",
+    "subtitle": "Peaceful building strategy puzzle",
+    "category": "Puzzle",
+    "icon": "https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=180&q=80",
+    "price": "View"
+  }
+];
+
 export const ESSENTIAL_INDIE_GAMES = [
   {
     "id": "mv2",

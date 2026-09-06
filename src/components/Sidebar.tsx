@@ -1,140 +1,112 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { SidebarItem } from "./SidebarItem";
-import { SearchBar } from "./SearchBar";
-import { CATEGORIES_LIST } from "../data/appStoreData";
-import {
-  Apple,
-  ChevronDown,
-  BookOpen,
-  Rocket,
-  Layers,
-  Gamepad2,
-  LayoutGrid,
-  Camera,
-  Activity,
-  Send,
-  Tv,
-  UtensilsCrossed,
-  Zap,
-  Map,
-  Puzzle,
-  Gem,
-  Menu,
-  X
-} from "lucide-react";
+import React from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { 
+  Sparkles, 
+  Gamepad2, 
+  Layers, 
+  Joystick, 
+  Search,
+  Smartphone,
+  Tablet,
+  Laptop,
+  Watch,
+  Tv
+} from 'lucide-react';
+import { NAVIGATION_ITEMS, PLATFORMS } from '../data/appStoreData';
 
-const ICON_MAP: Record<string, any> = {
-  LayoutGrid,
-  Camera,
-  Activity,
-  Send,
-  Tv,
-  UtensilsCrossed,
-  Zap,
-  Map,
-  Puzzle,
-  Gem
-};
+interface SidebarProps {
+  onSearchClick?: () => void;
+}
 
-export const Sidebar: React.FC = () => {
-  const [device, setDevice] = useState("iPhone");
-  const [isOpen, setIsOpen] = useState(false);
+export const Sidebar: React.FC<SidebarProps> = ({ onSearchClick }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const getNavIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'Sparkles':
+        return <Sparkles className="w-5 h-5" />;
+      case 'Gamepad2':
+        return <Gamepad2 className="w-5 h-5" />;
+      case 'Layers':
+        return <Layers className="w-5 h-5" />;
+      case 'Joystick':
+        return <Joystick className="w-5 h-5" />;
+      default:
+        return <Sparkles className="w-5 h-5" />;
+    }
+  };
+
+  const getPlatformIcon = (id: string) => {
+    switch (id) {
+      case 'iphone': return <Smartphone className="w-4 h-4" />;
+      case 'ipad': return <Tablet className="w-4 h-4" />;
+      case 'mac': return <Laptop className="w-4 h-4" />;
+      case 'watch': return <Watch className="w-4 h-4" />;
+      case 'tv': return <Tv className="w-4 h-4" />;
+      default: return <Smartphone className="w-4 h-4" />;
+    }
+  };
 
   return (
-    <>
-      {/* Mobile Menu Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-3 left-3 z-50 p-2.5 bg-[#1E1E22] border border-[#2E2E32] text-white rounded-xl shadow-lg"
-      >
-        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-      </button>
+    <aside className="w-60 shrink-0 hidden lg:flex flex-col border-r border-gray-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl h-screen sticky top-0 px-4 py-6 select-none z-30">
+      {/* Search Input Trigger */}
+      <div className="mb-6">
+        <button
+          onClick={onSearchClick || (() => navigate('/search'))}
+          className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-gray-500 dark:text-zinc-400 bg-gray-100 dark:bg-zinc-900 hover:bg-gray-200 dark:hover:bg-zinc-800 rounded-xl transition-colors text-left"
+        >
+          <Search className="w-4 h-4 text-gray-400" />
+          <span>Search</span>
+        </button>
+      </div>
 
-      {/* Sidebar Overlay for Mobile */}
-      {isOpen && (
-        <div
-          onClick={() => setIsOpen(false)}
-          className="lg:hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
-        />
-      )}
-
-      {/* Sidebar Body */}
-      <aside
-        className={`fixed lg:sticky top-0 left-0 z-40 w-64 bg-[#121212] border-r border-[#262626] h-screen flex flex-col justify-between p-4 text-slate-300 font-sans transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
-      >
-        <div className="space-y-5 overflow-y-auto">
-          
-          {/* Header Dropdown ( App Store for iPhone ˅) */}
-          <div className="flex items-center justify-between px-1">
-            <button className="flex items-center gap-2 text-white font-bold text-sm hover:text-slate-200 transition-colors py-1">
-              <Apple className="w-4 h-4 fill-white" />
-              <span>App Store for {device}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-            </button>
-          </div>
-
-          {/* Search Bar */}
-          <SearchBar />
-
-          {/* Main Navigation */}
-          <div className="space-y-0.5">
-            <SidebarItem to="/today" label="Today" icon={BookOpen} iconColor="text-sky-400" />
-            <SidebarItem to="/games" label="Games" icon={Rocket} iconColor="text-blue-400" />
-            <SidebarItem to="/apps" label="Apps" icon={Layers} iconColor="text-blue-500" />
-            <SidebarItem to="/arcade" label="Arcade" icon={Gamepad2} iconColor="text-red-400" />
-          </div>
-
-          {/* Categories List */}
-          <div className="space-y-0.5 pt-2 border-t border-[#222226]">
-            <Link
-              to="/categories"
-              className="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 block my-1 hover:text-white"
+      {/* Main Navigation */}
+      <div className="space-y-1 mb-8">
+        {NAVIGATION_ITEMS.filter(item => item.id !== 'search').map((item) => {
+          const isActive = location.pathname === item.path || (item.path === '/today' && location.pathname === '/');
+          return (
+            <NavLink
+              key={item.id}
+              to={item.path}
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all ${
+                isActive
+                  ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                  : 'text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900'
+              }`}
             >
-              Categories
-            </Link>
+              {getNavIcon(item.iconName)}
+              <span>{item.title}</span>
+            </NavLink>
+          );
+        })}
+      </div>
 
-            {CATEGORIES_LIST.map((cat) => {
-              const IconComp = ICON_MAP[cat.icon] || LayoutGrid;
-              const isFood = cat.id === "food-drink";
-              const targetRoute = isFood ? "/twenty-four-seven" : `/category/${cat.id}`;
-
-              return (
-                <SidebarItem
-                  key={cat.id}
-                  to={targetRoute}
-                  label={cat.name}
-                  icon={IconComp}
-                  iconColor={isFood ? "text-yellow-400" : "text-sky-400"}
-                  badge={isFood ? "24S" : undefined}
-                />
-              );
-            })}
-          </div>
-
+      {/* Platform Selector */}
+      <div className="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-900">
+        <div className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500">
+          Device
         </div>
-
-        {/* Bottom Twenty Four Seven Shortcut */}
-        <div className="pt-3 border-t border-[#262626] shrink-0">
-          <Link
-            to="/twenty-four-seven"
-            className="flex items-center gap-2.5 bg-gradient-to-r from-yellow-400/20 to-red-600/20 border border-yellow-500/30 hover:border-yellow-400 p-2.5 rounded-2xl transition-all group"
-          >
-            <div className="w-8 h-8 rounded-xl bg-yellow-400 text-black font-extrabold flex items-center justify-center text-xs shrink-0 shadow-md">
-              24S
-            </div>
-            <div>
-              <span className="font-bold text-white text-xs block group-hover:text-yellow-400 transition-colors">
-                Twenty Four Seven
-              </span>
-              <span className="text-[10px] text-slate-400">#1 Food & Drink</span>
-            </div>
-          </Link>
+        <div className="space-y-0.5">
+          {PLATFORMS.map((plat) => {
+            const isActive = location.pathname === plat.path;
+            return (
+              <NavLink
+                key={plat.id}
+                to={plat.path}
+                className={`flex items-center gap-3 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors ${
+                  isActive
+                    ? 'bg-gray-200 dark:bg-zinc-800 text-blue-600 dark:text-blue-400 font-semibold'
+                    : 'text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-900'
+                }`}
+              >
+                {getPlatformIcon(plat.id)}
+                <span>{plat.name}</span>
+              </NavLink>
+            );
+          })}
         </div>
-
-      </aside>
-    </>
+      </div>
+    </aside>
   );
 };

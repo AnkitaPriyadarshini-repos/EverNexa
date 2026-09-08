@@ -16,9 +16,10 @@ EverNexa is a production-grade full-stack web platform inspired by the public Ap
 
 ---
 
-## 🚀 Repository & Deployment Links
+## 🚀 Deployment & Repository Links
 
-- **Deployment Link**: [https://github.com/AnkitaPriyadarshini-repos/EverNexa](https://github.com/AnkitaPriyadarshini-repos/EverNexa)
+- **Live Application URL**: [https://ankitapriyadarshini-repos.github.io/EverNexa/](https://ankitapriyadarshini-repos.github.io/EverNexa/)
+- **GitHub Repository**: [https://github.com/AnkitaPriyadarshini-repos/EverNexa](https://github.com/AnkitaPriyadarshini-repos/EverNexa)
 
 ---
 

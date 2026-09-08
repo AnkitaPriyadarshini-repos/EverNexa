@@ -29,7 +29,7 @@ export const AppDetailPage = () => {
       
       {/* Top Breadcrumb & URL indicator */}
       <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
-        <span>https://apps.apple.com/in/app/twenty-four-seven/id1049305223</span>
+        <span>http://localhost:5173/twenty-four-seven</span>
       </div>
 
       {/* Header Info Section */}

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppItem } from '../types/appStore';
+import { Download, Check } from 'lucide-react';
 
 interface AppCardProps {
   app: AppItem;
@@ -16,6 +17,7 @@ export const AppCard: React.FC<AppCardProps> = ({
   onGetClick 
 }) => {
   const navigate = useNavigate();
+  const [downloadState, setDownloadState] = useState<'idle' | 'downloading' | 'open'>('idle');
 
   const handleCardClick = () => {
     navigate(`/app/${app.id}`);
@@ -23,8 +25,43 @@ export const AppCard: React.FC<AppCardProps> = ({
 
   const handleGet = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (onGetClick) onGetClick(app);
-    else alert(`Downloading ${app.name}...`);
+    if (onGetClick) {
+      onGetClick(app);
+      return;
+    }
+
+    if (downloadState === 'open') {
+      if (app.name.toLowerCase().includes('twenty four seven') || app.id.includes('24s')) {
+        navigate('/twenty-four-seven');
+      } else {
+        navigate(`/app/${app.id}`);
+      }
+      return;
+    }
+
+    if (downloadState === 'idle') {
+      setDownloadState('downloading');
+      setTimeout(() => {
+        setDownloadState('open');
+      }, 1200);
+    }
+  };
+
+  const renderButtonContent = () => {
+    if (downloadState === 'downloading') {
+      return (
+        <span className="flex items-center gap-1.5 animate-pulse">
+          <span className="w-2.5 h-2.5 rounded-full border-2 border-white border-t-transparent animate-spin" />
+          <span>...</span>
+        </span>
+      );
+    }
+
+    if (downloadState === 'open') {
+      return 'OPEN';
+    }
+
+    return app.price || 'GET';
   };
 
   if (layout === 'overlay') {
@@ -54,9 +91,13 @@ export const AppCard: React.FC<AppCardProps> = ({
 
         <button
           onClick={handleGet}
-          className="shrink-0 px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-bold transition-all shadow-sm"
+          className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm ${
+            downloadState === 'open' 
+              ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+              : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white'
+          }`}
         >
-          {app.price || 'GET'}
+          {renderButtonContent()}
         </button>
       </div>
     );
@@ -94,9 +135,13 @@ export const AppCard: React.FC<AppCardProps> = ({
       <div className="flex flex-col items-end gap-1 shrink-0">
         <button
           onClick={handleGet}
-          className="px-4 py-1.5 rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-blue-600 dark:text-blue-400 text-xs font-bold transition-all"
+          className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+            downloadState === 'open'
+              ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+              : 'bg-gray-100 dark:bg-zinc-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-blue-600 dark:text-blue-400'
+          }`}
         >
-          {app.price || 'GET'}
+          {renderButtonContent()}
         </button>
         <span className="text-[9px] text-gray-400 dark:text-zinc-500">
           In-App Purchases

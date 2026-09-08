@@ -5,11 +5,13 @@ import { AppCard } from './AppCard';
 interface EditorialCardProps {
   item: EditorialItem;
   size?: 'hero' | 'medium' | 'tall';
+  onCardClick?: (item: EditorialItem) => void;
 }
 
 export const EditorialCard: React.FC<EditorialCardProps> = ({ 
   item,
-  size = 'hero'
+  size = 'hero',
+  onCardClick
 }) => {
   const getContainerHeight = () => {
     switch (size) {
@@ -20,9 +22,16 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
     }
   };
 
+  const handleCardClick = () => {
+    if (onCardClick) {
+      onCardClick(item);
+    }
+  };
+
   return (
     <div 
-      className={`relative w-full rounded-3xl overflow-hidden shadow-xl group border border-black/5 dark:border-white/10 flex flex-col justify-between p-6 sm:p-8 transition-all hover:shadow-2xl ${getContainerHeight()}`}
+      onClick={handleCardClick}
+      className={`relative w-full rounded-3xl overflow-hidden shadow-xl group border border-black/5 dark:border-white/10 flex flex-col justify-between p-6 sm:p-8 transition-all hover:shadow-2xl cursor-pointer ${getContainerHeight()}`}
       style={{
         backgroundColor: item.backgroundColor || '#1A1A1A',
         color: item.textColor || '#FFFFFF'
@@ -61,7 +70,7 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
       </div>
 
       {/* Bottom Content: Single App or Apps List */}
-      <div className="relative z-10 mt-6 pt-4">
+      <div className="relative z-10 mt-6 pt-4" onClick={(e) => e.stopPropagation()}>
         {item.app && (
           <div className="max-w-md">
             <AppCard app={item.app} layout="overlay" />

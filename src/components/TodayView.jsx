@@ -50,7 +50,7 @@ export const TodayView = () => {
       
       {/* Top Breadcrumb & URL indicator matching screenshot */}
       <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
-        <span>https://apps.apple.com/in/iphone/today</span>
+        <span>http://localhost:5173/today</span>
       </div>
 
       {/* Hero Cards Carousel / Grid (Matching Screenshot 4!) */}

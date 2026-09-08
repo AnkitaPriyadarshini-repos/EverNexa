@@ -4,13 +4,13 @@ import { TWENTY_FOUR_SEVEN_APP } from "../data/appStoreData";
 const AppStoreContext = createContext();
 
 export const AppStoreProvider = ({ children }) => {
-  // Navigation tabs: 'today' (DEFAULT as per https://apps.apple.com/in/iphone/today), 'games', 'apps', 'arcade', 'twenty_four_seven', 'category'
+  // Navigation tabs: 'today', 'games', 'apps', 'arcade', 'twenty_four_seven', 'category'
   const [activeTab, setActiveTab] = useState("today");
   const [searchQuery, setSearchQuery] = useState("");
   const [deviceType, setDeviceType] = useState("iPhone"); // 'iPhone', 'iPad', 'Mac'
   const [activeApp, setActiveApp] = useState(TWENTY_FOUR_SEVEN_APP);
 
-  // Story detail modal (e.g. /in/iphone/story/id1819964646)
+  // Story detail modal
   const [activeStory, setActiveStory] = useState(null);
 
   // Embedded Live App Simulator modal

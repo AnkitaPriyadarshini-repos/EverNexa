@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![App Store Today](https://img.shields.io/badge/App_Store-India_Today_Recreation-0D96F6?style=for-the-badge&logo=apple&logoColor=white)](https://apps.apple.com/in/iphone/today)
+[![App Store Today](https://img.shields.io/badge/App_Store-India_Today_Recreation-0D96F6?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/AnkitaPriyadarshini-repos/EverNexa)
 [![React 19](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -18,12 +18,7 @@ EverNexa is a production-grade full-stack web platform inspired by the public Ap
 
 ## 🚀 Repository & Deployment Links
 
-- **GitHub Repository**: [https://github.com/AnkitaPriyadarshini-repos/EverNexa.git](https://github.com/AnkitaPriyadarshini-repos/EverNexa.git)
-- **Local Application URL**: [http://localhost:5173/](http://localhost:5173/)
-- **24S Express Convenience Store**: [http://localhost:5173/twenty-four-seven](http://localhost:5173/twenty-four-seven)
-- **Indie Grouping Storefront**: [http://localhost:5173/grouping/174175](http://localhost:5173/grouping/174175)
-- **Admin Management Portal**: [http://localhost:5173/admin](http://localhost:5173/admin)
-- **Telemetry Health Check**: [http://localhost:5173/api/health](http://localhost:5173/api/health)
+- **Deployment Link**: [https://github.com/AnkitaPriyadarshini-repos/EverNexa](https://github.com/AnkitaPriyadarshini-repos/EverNexa)
 
 ---
 
@@ -36,7 +31,7 @@ EverNexa is a production-grade full-stack web platform inspired by the public Ap
 
 2. **Real App Detail Pages (`/app/:appId`)**:
    - Displays icon, developer, category, age rating, star rating, preview screenshots, description, and What's New version release notes.
-   - Official **"View on App Store"** action button opening legitimate `apps.apple.com` destinations.
+   - Interactive GET button and live simulator launcher.
 
 3. **24/7 Twenty Four Seven (24S) Convenience Store (`/twenty-four-seven`)**:
    - 24/7 Express Delivery store for hot food (Hot Dogs), iced coffee, snacks, drinks, and daily essentials.

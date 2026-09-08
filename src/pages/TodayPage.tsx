@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { EditorialCard } from '../components/EditorialCard';
 import { EditorialCarousel } from '../components/EditorialCarousel';
 import { HorizontalShelf } from '../components/HorizontalShelf';
+import { StoryModal } from '../components/StoryModal';
 import { ALL_TODAY_SHELVES } from '../data/allTodayData';
 import { TOP_APPS_WEEK, HOT_APPS_WEEK } from '../data/appStoreData';
 
 export const TodayPage: React.FC = () => {
+  const [selectedStory, setSelectedStory] = useState<any | null>(null);
+
   // Extract shelves
   const shelf1 = ALL_TODAY_SHELVES.find(s => s.shelfId === 1)?.items || [];
   const shelf2 = ALL_TODAY_SHELVES.find(s => s.shelfId === 2)?.items || [];
@@ -23,7 +26,12 @@ export const TodayPage: React.FC = () => {
       {shelf1.length > 0 && (
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {shelf1.map((card) => (
-            <EditorialCard key={card.id} item={card as any} size="hero" />
+            <EditorialCard 
+              key={card.id} 
+              item={card as any} 
+              size="hero" 
+              onCardClick={(item) => setSelectedStory(item)}
+            />
           ))}
         </section>
       )}
@@ -43,7 +51,11 @@ export const TodayPage: React.FC = () => {
           <EditorialCarousel>
             {shelf2.map((card) => (
               <div key={card.id} className="w-[85vw] sm:w-[500px] shrink-0 snap-start">
-                <EditorialCard item={card as any} size="medium" />
+                <EditorialCard 
+                  item={card as any} 
+                  size="medium" 
+                  onCardClick={(item) => setSelectedStory(item)}
+                />
               </div>
             ))}
           </EditorialCarousel>
@@ -64,7 +76,12 @@ export const TodayPage: React.FC = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {shelf3.map((card) => (
-              <EditorialCard key={card.id} item={card as any} size="tall" />
+              <EditorialCard 
+                key={card.id} 
+                item={card as any} 
+                size="tall" 
+                onCardClick={(item) => setSelectedStory(item)}
+              />
             ))}
           </div>
         </section>
@@ -85,7 +102,11 @@ export const TodayPage: React.FC = () => {
           <EditorialCarousel>
             {shelf4.map((card) => (
               <div key={card.id} className="w-[85vw] sm:w-[520px] shrink-0 snap-start">
-                <EditorialCard item={card as any} size="medium" />
+                <EditorialCard 
+                  item={card as any} 
+                  size="medium" 
+                  onCardClick={(item) => setSelectedStory(item)}
+                />
               </div>
             ))}
           </EditorialCarousel>
@@ -105,7 +126,12 @@ export const TodayPage: React.FC = () => {
           {/* Grid of editorial cards in Shelf 5 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {shelf5.filter(c => c.title && c.title !== "Top apps this week" && c.title !== "Hot this week ").slice(0, 4).map((card) => (
-              <EditorialCard key={card.id} item={card as any} size="medium" />
+              <EditorialCard 
+                key={card.id} 
+                item={card as any} 
+                size="medium" 
+                onCardClick={(item) => setSelectedStory(item)}
+              />
             ))}
           </div>
 
@@ -119,10 +145,23 @@ export const TodayPage: React.FC = () => {
           {/* Remaining Editorial Cards in Shelf 5 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {shelf5.filter(c => c.title && c.title !== "Top apps this week" && c.title !== "Hot this week ").slice(4).map((card) => (
-              <EditorialCard key={card.id} item={card as any} size="medium" />
+              <EditorialCard 
+                key={card.id} 
+                item={card as any} 
+                size="medium" 
+                onCardClick={(item) => setSelectedStory(item)}
+              />
             ))}
           </div>
         </section>
+      )}
+
+      {/* Story Modal popup when an editorial card is clicked */}
+      {selectedStory && (
+        <StoryModal 
+          activeStory={selectedStory} 
+          onClose={() => setSelectedStory(null)} 
+        />
       )}
     </div>
   );

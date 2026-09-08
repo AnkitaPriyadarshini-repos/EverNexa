@@ -8,15 +8,15 @@ export const BrowserAddressBar = () => {
   // Compute current URL based on active view state
   const getCurrentUrl = () => {
     if (activeStory) {
-      return "https://apps.apple.com/in/iphone/story/id1819964646";
+      return "http://localhost:5173/story/1819964646";
     }
     if (activeTab === "twenty_four_seven" || activeTab === "food_drink") {
-      return `https://apps.apple.com/in/app/${activeApp.slug || "twenty-four-seven"}/id${activeApp.id || "1049305223"}`;
+      return `http://localhost:5173/twenty-four-seven/product/${activeApp.id || "1049305223"}`;
     }
-    if (activeTab === "games") return "https://apps.apple.com/in/iphone/games";
-    if (activeTab === "apps") return "https://apps.apple.com/in/iphone/apps";
-    if (activeTab === "arcade") return "https://apps.apple.com/in/iphone/arcade";
-    return "https://apps.apple.com/in/iphone/today";
+    if (activeTab === "games") return "http://localhost:5173/games";
+    if (activeTab === "apps") return "http://localhost:5173/apps";
+    if (activeTab === "arcade") return "http://localhost:5173/arcade";
+    return "http://localhost:5173/today";
   };
 
   const getTabTitle = () => {

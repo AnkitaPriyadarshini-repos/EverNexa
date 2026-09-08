@@ -7,17 +7,8 @@ export const TopNavigation: React.FC = () => {
   const location = useLocation();
 
   const getFullUrl = () => {
-    if (location.pathname === "/twenty-four-seven") {
-      return "https://apps.apple.com/in/app/twenty-four-seven/id1049305223";
-    }
-    if (location.pathname === "/games") return "https://apps.apple.com/in/iphone/games";
-    if (location.pathname === "/apps") return "https://apps.apple.com/in/iphone/apps";
-    if (location.pathname === "/arcade") return "https://apps.apple.com/in/iphone/arcade";
-    if (location.pathname === "/categories") return "https://apps.apple.com/in/iphone/categories";
-    if (location.pathname.startsWith("/category/")) {
-      return `https://apps.apple.com/in/iphone/category/${location.pathname.split("/")[2]}`;
-    }
-    return "https://apps.apple.com/in/iphone/today";
+    const origin = window.location.origin || "http://localhost:5173";
+    return `${origin}${location.pathname}`;
   };
 
   const getTabTitle = () => {

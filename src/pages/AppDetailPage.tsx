@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react; react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { AppItem } from '../types/appStore';
 import { getAppById, getAllApps } from '../services/appService';
 import { ExternalLink, Star, ShieldCheck, Share2, ArrowLeft } from 'lucide-react';
@@ -85,16 +85,20 @@ export const AppDetailPage: React.FC = () => {
               {app.price || 'GET'}
             </button>
 
-            {/* Official View on App Store External Button */}
-            <a
-              href={app.appStoreUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Interactive Launch Button */}
+            <button
+              onClick={() => {
+                if (app.name.toLowerCase().includes('twenty four seven') || app.id.includes('24s')) {
+                  navigate('/twenty-four-seven');
+                } else {
+                  alert(`Launching ${app.name} interactive session...`);
+                }
+              }}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-800 dark:text-zinc-200 text-sm font-bold transition-all border border-gray-200 dark:border-zinc-700"
             >
-              <span>View on App Store</span>
+              <span>Launch App</span>
               <ExternalLink className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            </a>
+            </button>
           </div>
         </div>
       </div>

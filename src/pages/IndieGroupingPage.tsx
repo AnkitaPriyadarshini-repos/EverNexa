@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppCard } from '../components/AppCard';
 import { RankedCard } from '../components/RankedCard';
 import { EditorialCard } from '../components/EditorialCard';
+import { StoryModal } from '../components/StoryModal';
 import { 
   HERO_INDIE_SPOTLIGHT,
   ESSENTIAL_INDIE_GAMES, 
@@ -18,6 +19,7 @@ import { ChevronRight, ExternalLink } from 'lucide-react';
 
 export const IndieGroupingPage: React.FC = () => {
   const navigate = useNavigate();
+  const [selectedStory, setSelectedStory] = useState<any | null>(null);
 
   // Helper to chunk 3-column stacked grids matching Apple App Store grouping layout
   const chunkColumns = (list: any[]) => {
@@ -35,28 +37,32 @@ export const IndieGroupingPage: React.FC = () => {
   const allTimeCols = chunkColumns(ALL_TIME_GREATS);
 
   return (
-    <div className="space-y-12 pb-24 text-white">
+    <div className="space-y-12 pb-24 text-gray-900 dark:text-white">
       {/* Title */}
       <div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
           Indie
         </h1>
       </div>
 
       {/* FEATURED INDIE HERO SPOTLIGHT CARD */}
       <section>
-        <EditorialCard item={HERO_INDIE_SPOTLIGHT} size="hero" />
+        <EditorialCard 
+          item={HERO_INDIE_SPOTLIGHT} 
+          size="hero" 
+          onCardClick={(item) => setSelectedStory(item)}
+        />
       </section>
 
       {/* SECTION 1: Essential Indie Games */}
       <section className="space-y-4">
         <div className="flex items-center gap-1 cursor-pointer group">
-          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          <h2 className="text-xl sm:text-2xl font-bold group-hover:text-blue-500 transition-colors">
             Essential Indie Games
           </h2>
-          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
         </div>
-        <p className="text-xs sm:text-sm text-gray-400 font-medium -mt-2">
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium -mt-2">
           Small developers, big fun
         </p>
 
@@ -72,14 +78,14 @@ export const IndieGroupingPage: React.FC = () => {
       </section>
 
       {/* SECTION 2: Story-Rich Indie Adventures (NEW) */}
-      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
+      <section className="space-y-4 border-t border-gray-200 dark:border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
-          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          <h2 className="text-xl sm:text-2xl font-bold group-hover:text-blue-500 transition-colors">
             Story-Rich Indie Adventures
           </h2>
-          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
         </div>
-        <p className="text-xs sm:text-sm text-gray-400 font-medium -mt-2">
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium -mt-2">
           Unforgettable narratives and emotional journeys
         </p>
 
@@ -95,12 +101,12 @@ export const IndieGroupingPage: React.FC = () => {
       </section>
 
       {/* SECTION 3: Let's Play */}
-      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
+      <section className="space-y-4 border-t border-gray-200 dark:border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
-          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          <h2 className="text-xl sm:text-2xl font-bold group-hover:text-blue-500 transition-colors">
             Let's Play
           </h2>
-          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
         </div>
 
         <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
@@ -115,12 +121,12 @@ export const IndieGroupingPage: React.FC = () => {
       </section>
 
       {/* SECTION 4: Top Paid */}
-      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
+      <section className="space-y-4 border-t border-gray-200 dark:border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
-          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          <h2 className="text-xl sm:text-2xl font-bold group-hover:text-blue-500 transition-colors">
             Top Paid
           </h2>
-          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
         </div>
 
         <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
@@ -139,12 +145,12 @@ export const IndieGroupingPage: React.FC = () => {
       </section>
 
       {/* SECTION 5: Top Free */}
-      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
+      <section className="space-y-4 border-t border-gray-200 dark:border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
-          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          <h2 className="text-xl sm:text-2xl font-bold group-hover:text-blue-500 transition-colors">
             Top Free
           </h2>
-          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
         </div>
 
         <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
@@ -163,14 +169,14 @@ export const IndieGroupingPage: React.FC = () => {
       </section>
 
       {/* SECTION 6: Cozy & Relaxation Indies (NEW) */}
-      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
+      <section className="space-y-4 border-t border-gray-200 dark:border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
-          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          <h2 className="text-xl sm:text-2xl font-bold group-hover:text-blue-500 transition-colors">
             Cozy & Relaxation Indies
           </h2>
-          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
         </div>
-        <p className="text-xs sm:text-sm text-gray-400 font-medium -mt-2">
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium -mt-2">
           Unwind with peaceful puzzles, soothing music and warm simulations
         </p>
 
@@ -186,12 +192,12 @@ export const IndieGroupingPage: React.FC = () => {
       </section>
 
       {/* SECTION 7: All-Time Greats */}
-      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
+      <section className="space-y-4 border-t border-gray-200 dark:border-zinc-800/80 pt-8">
         <div className="flex items-center gap-1 cursor-pointer group">
-          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          <h2 className="text-xl sm:text-2xl font-bold group-hover:text-blue-500 transition-colors">
             All-Time Greats
           </h2>
-          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+          <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
         </div>
 
         <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
@@ -206,8 +212,8 @@ export const IndieGroupingPage: React.FC = () => {
       </section>
 
       {/* SECTION 8: Quick Links */}
-      <section className="space-y-4 border-t border-zinc-800/80 pt-8">
-        <h2 className="text-xl sm:text-2xl font-bold text-white">
+      <section className="space-y-4 border-t border-gray-200 dark:border-zinc-800/80 pt-8">
+        <h2 className="text-xl sm:text-2xl font-bold">
           Quick Links
         </h2>
 
@@ -218,7 +224,7 @@ export const IndieGroupingPage: React.FC = () => {
               href={link.url}
               target={link.external ? "_blank" : "_self"}
               rel="noopener noreferrer"
-              className="flex items-center justify-between py-2 border-b border-zinc-800 text-sm font-semibold text-blue-500 hover:text-blue-400 transition-colors"
+              className="flex items-center justify-between py-2 border-b border-gray-200 dark:border-zinc-800 text-sm font-semibold text-blue-500 hover:text-blue-400 transition-colors"
             >
               <span>{link.title}</span>
               {link.external && <ExternalLink className="w-3.5 h-3.5 opacity-80" />}
@@ -226,6 +232,14 @@ export const IndieGroupingPage: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* Story Modal popup */}
+      {selectedStory && (
+        <StoryModal 
+          activeStory={selectedStory} 
+          onClose={() => setSelectedStory(null)} 
+        />
+      )}
     </div>
   );
 };

@@ -5,18 +5,18 @@ import { X, Check, Plus, SlidersHorizontal, Flame } from "lucide-react";
 export const CustomizeModal = () => {
   const { customizeItem, setCustomizeItem, addToCart } = useApp();
 
-  if (!customizeItem) return null;
-
   const [selectedSauces, setSelectedSauces] = useState(
-    customizeItem.options?.sauces ? [customizeItem.options.sauces[0]] : []
+    customizeItem?.options?.sauces ? [customizeItem.options.sauces[0]] : []
   );
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [selectedTemp, setSelectedTemp] = useState(
-    customizeItem.options?.temperature ? customizeItem.options.temperature[0] : null
+    customizeItem?.options?.temperature ? customizeItem.options.temperature[0] : null
   );
   const [selectedSpice, setSelectedSpice] = useState(
-    customizeItem.options?.spice ? customizeItem.options.spice[0] : null
+    customizeItem?.options?.spice ? customizeItem.options.spice[0] : null
   );
+
+  if (!customizeItem) return null;
 
   // Calculate unit price based on selected add-ons
   const addonsTotal = selectedAddons.reduce((sum, addon) => sum + addon.price, 0);

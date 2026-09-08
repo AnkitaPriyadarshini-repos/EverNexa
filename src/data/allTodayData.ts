@@ -1,4 +1,4 @@
-// Complete parsed server payload data from https://apps.apple.com/in/iphone/today
+// Complete parsed server payload data for App Store Today
 
 export interface TodayParsedItem {
   id: string;
@@ -41,7 +41,7 @@ export const ALL_TODAY_SHELVES: { shelfId: number; items: TodayParsedItem[] }[] 
           "rating": "4.8",
           "ratingCount": 15400,
           "ageRating": "4+",
-          "appStoreUrl": "https://apps.apple.com/in/app/id48625634"
+          "appStoreUrl": "/app/id48625634"
         },
         "appsList": []
       },

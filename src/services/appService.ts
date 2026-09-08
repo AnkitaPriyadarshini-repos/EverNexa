@@ -9,7 +9,7 @@ const ALL_LOCAL_APPS: AppItem[] = [...TOP_APPS_WEEK, ...HOT_APPS_WEEK].map((app)
   ageRating: "4+",
   version: "3.12.0",
   releaseDate: "2026-01-15",
-  appStoreUrl: `https://apps.apple.com/in/app/${app.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}/id${Math.floor(100000000 + Math.random() * 900000000)}`,
+  appStoreUrl: `/app/${app.id}`,
   screenshots: [
     "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
@@ -46,7 +46,7 @@ export const getAppById = async (id: string): Promise<AppItem | null> => {
         price: item.formattedPrice || "GET",
         developer: item.artistName,
         description: item.description,
-        appStoreUrl: item.trackViewUrl || `https://apps.apple.com/in/app/id${item.trackId}`
+        appStoreUrl: `/app/${item.trackId}`
       };
     }
   } catch (err) {
@@ -67,7 +67,7 @@ export const getAppById = async (id: string): Promise<AppItem | null> => {
     price: "GET",
     developer: "Apple Developer Network",
     description: "Experience world-class apps and games on your Apple device.",
-    appStoreUrl: `https://apps.apple.com/in/app/${id}`
+    appStoreUrl: `/app/${id}`
   };
 };
 

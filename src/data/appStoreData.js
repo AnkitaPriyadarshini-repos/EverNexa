@@ -57,7 +57,7 @@ export const EVENTS_LIST = [
     eyebrow: "LEVEL UP",
     title: "Go interstellar in Forge of Empires",
     subtitle: "Build a second city beyond the solar system.",
-    url: "https://apps.apple.com/in/iphone/story/id6788810046",
+    url: "/app/id6788810046",
     badge: "NOW AVAILABLE",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80"
   },
@@ -66,7 +66,7 @@ export const EVENTS_LIST = [
     eyebrow: "MAJOR UPDATE",
     title: "Venture into the Snowy Forest",
     subtitle: "New Operators join the fray in Arknights: Endfield.",
-    url: "https://apps.apple.com/in/iphone/story/id6796341930",
+    url: "/app/id6796341930",
     badge: "NEW SEASON",
     image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80"
   },
@@ -75,7 +75,7 @@ export const EVENTS_LIST = [
     eyebrow: "24/7 MIDNIGHT",
     title: "24Seven Signature Hot Dog Festival",
     subtitle: "Buy 1 Classic Cheese Hot Dog, Get 1 Iced Cold Coffee @ 50% OFF!",
-    url: "https://apps.apple.com/in/app/twenty-four-seven/id1049305223",
+    url: "/twenty-four-seven",
     badge: "HOT OFFER",
     image: "/assets/hotdog.jpg",
     is24Seven: true
@@ -93,7 +93,7 @@ export const CATS_GAMES = [
 export const TWENTY_FOUR_SEVEN_APP = {
   id: "1049305223",
   slug: "twenty-four-seven",
-  url: "https://apps.apple.com/in/app/twenty-four-seven/id1049305223",
+  url: "/twenty-four-seven",
   name: "Twenty Four Seven",
   subtitle: "24/7 Convenience Store & Express Delivery",
   developer: "Godfrey Phillips India Retail Ltd",

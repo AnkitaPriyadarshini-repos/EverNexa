@@ -392,43 +392,43 @@ export const ALL_TIME_GREATS = [
 ];
 export const QUICK_LINKS = [
   {
-    "title": "About the App Store",
-    "url": "https://www.apple.com/app-store/",
-    "external": true
-  },
-  {
-    "title": "Report a Problem",
-    "url": "https://reportaproblem.apple.com/",
-    "external": true
-  },
-  {
-    "title": "About Apps & Games for Your Kids",
-    "url": "https://support.apple.com/ht201304",
+    "title": "About EverNexa App Store",
+    "url": "/today",
     "external": false
   },
   {
-    "title": "About In-App Purchases",
-    "url": "https://support.apple.com/ht202023",
+    "title": "24S Express Storefront",
+    "url": "/twenty-four-seven",
     "external": false
   },
   {
-    "title": "Change Your Payment Method",
-    "url": "https://support.apple.com/ht201266",
+    "title": "Indie Grouping Storefront",
+    "url": "/grouping/174175",
     "external": false
   },
   {
-    "title": "Request a Refund",
-    "url": "https://reportaproblem.apple.com/",
-    "external": true
-  },
-  {
-    "title": "About Personalisation",
-    "url": "https://support.apple.com/ht202074",
+    "title": "Admin Management Portal",
+    "url": "/admin",
     "external": false
   },
   {
-    "title": "Explore Apple Arcade",
-    "url": "https://www.apple.com/apple-arcade/",
+    "title": "System Telemetry Health",
+    "url": "/api/health",
+    "external": false
+  },
+  {
+    "title": "Explore Indie Games",
+    "url": "/indie",
+    "external": false
+  },
+  {
+    "title": "Categories & Top Apps",
+    "url": "/games",
+    "external": false
+  },
+  {
+    "title": "Arcade Collection",
+    "url": "/arcade",
     "external": false
   }
 ];
